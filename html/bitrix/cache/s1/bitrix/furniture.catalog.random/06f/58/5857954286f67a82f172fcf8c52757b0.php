@@ -1,8 +1,8 @@
 <?
 if($INCLUDE_FROM_CACHE!='Y')return false;
-$datecreate = '001737301125';
-$dateexpire = '001737301305';
-$ser_content = 'a:2:{s:7:"CONTENT";s:418:"<div class="special-product">
+$datecreate = '001737308158';
+$dateexpire = '001737308338';
+$ser_content = 'a:2:{s:7:"CONTENT";s:422:"<div class="special-product">
 	<div class="special-product-title"><a href="/products/2/19/">Президент</a></div>
 	<div class="special-product-image"><a href="/products/2/19/"><img src="/upload/iblock/780/wnmji0e2ne2gywv3ztf89984tmtikdm2.jpg" width="54" height="75" alt="Президент" title="Президент" /></a></div>
 	<div class="special-product"><span>Цена:</span> 14 999 руб.</div>

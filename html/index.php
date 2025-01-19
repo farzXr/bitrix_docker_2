@@ -1,30 +1,83 @@
-<?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Мебельная компания");
-?><p>
-Наша компания существует на Российском рынке с 1992 года. За это время «Мебельная компания» прошла большой путь от маленькой торговой фирмы до одного из крупнейших производителей корпусной мебели в России.
-</p><p>
-«Мебельная компания» осуществляет производство мебели на высококлассном оборудовании с применением минимальной доли ручного труда, что позволяет обеспечить высокое качество нашей продукции. Налажен производственный процесс как массового и индивидуального характера, что с одной стороны позволяет обеспечить постоянную номенклатуру изделий и индивидуальный подход – с другой.
-<h3>Наша продукция</h3>
-<?$APPLICATION->IncludeComponent("bitrix:furniture.catalog.index", "", array(
-	"IBLOCK_TYPE" => "products",
-	"IBLOCK_ID" => "2",
-	"IBLOCK_BINDING" => "section",
-	"CACHE_TYPE" => "A",
-	"CACHE_TIME" => "36000000",
-	"CACHE_GROUPS" => "N"
-	),
-	false
-);?>
-<h3>Наши услуги</h3>
-<?$APPLICATION->IncludeComponent("bitrix:furniture.catalog.index", "", array(
-	"IBLOCK_TYPE" => "products",
-	"IBLOCK_ID" => "3",
-	"IBLOCK_BINDING" => "element",
-	"CACHE_TYPE" => "A",
-	"CACHE_TIME" => "36000000",
-	"CACHE_GROUPS" => "N"
-	),
-	false
-);?>
-</p><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+<?php
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetTitle("Список книг");
+
+if (CModule::IncludeModule("iblock") && CModule::IncludeModule("catalog")) {
+    $iblockId = 5; // Замените на ID вашего инфоблока книг
+
+    $arSelect = ["ID", "NAME"]; // Убираем свойства цен
+    $arFilter = ["IBLOCK_ID" => $iblockId, "ACTIVE" => "Y"];
+
+    $res = CIBlockElement::GetList(
+        ["SORT" => "ASC"], // Сортировка
+        $arFilter,         // Условия фильтрации
+        false,             // Группировка
+        ["nPageSize" => 5], // Пагинация
+        $arSelect          // Поля для выборки
+    );
+
+    while ($arItem = $res->GetNext()) {
+        // Получение цен товара
+        $priceBase = null;
+        $priceSale = null;
+
+        $priceRes = \Bitrix\Catalog\PriceTable::getList([
+            'filter' => ['=PRODUCT_ID' => $arItem['ID']],
+            'select' => ['CATALOG_GROUP_ID', 'PRICE', 'CURRENCY']
+        ]);
+
+        while ($price = $priceRes->fetch()) {
+            if ($price['CATALOG_GROUP_ID'] == 1) { // ID базовой цены
+                $priceBase = $price['PRICE'];
+            } elseif ($price['CATALOG_GROUP_ID'] == 2) { // ID дополнительной цены
+                $priceSale = $price['PRICE'];
+            }
+        }
+
+        // Рассчитываем итоговую цену
+        $finalPrice = $priceSale !== null ? min($priceBase, $priceSale) : $priceBase;
+
+        // Получение всех авторов книги
+        $authors = [];
+        $propertyRes = CIBlockElement::GetProperty(
+            $iblockId,
+            $arItem["ID"],
+            [],
+            ["CODE" => "AUTHORS"] // Получаем только свойство AUTHORS
+        );
+
+        while ($property = $propertyRes->Fetch()) {
+            if ($property["VALUE"]) {
+                // Запрос к инфоблоку авторов для получения имени
+                $authorRes = CIBlockElement::GetList(
+                    [],
+                    ["ID" => $property["VALUE"]],
+                    false,
+                    false,
+                    ["ID", "NAME"]
+                );
+                if ($author = $authorRes->GetNext()) {
+                    $authors[] = $author["NAME"];
+                }
+            }
+        }
+
+        ?>
+        <div class="container">
+            <div class="book">
+                <div class="book-title"><?= htmlspecialchars($arItem["NAME"]) ?></div>
+                <div class="authors"><?= htmlspecialchars(implode(", ", $authors)) ?> </div>
+                <div class="price"><?= htmlspecialchars($finalPrice) ?>₽</div>
+            </div>
+        </div>
+        <?php
+    }
+    ?>
+
+    <?php
+} else {
+    echo "Ошибка подключения модулей.";
+}
+
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");
+?>

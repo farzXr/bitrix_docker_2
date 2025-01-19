@@ -1,8 +1,8 @@
 <?
 if($INCLUDE_FROM_CACHE!='Y')return false;
-$datecreate = '001737227260';
-$dateexpire = '001773227260';
-$ser_content = 'a:2:{s:7:"CONTENT";s:755:"<div class="news-list">
+$datecreate = '001737312781';
+$dateexpire = '001773312781';
+$ser_content = 'a:2:{s:7:"CONTENT";s:765:"<div class="news-list">
 <dl class="block-list">
 		<dt>27.05.2010</dt>
 		<dd><a href="/news/3/">Получено новое прочное водостойкое клеевое соединение.Изобретение относится к области получения и пр...</a></dd>

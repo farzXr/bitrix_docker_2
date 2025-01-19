@@ -1,8 +1,8 @@
 <?
 if($INCLUDE_FROM_CACHE!='Y')return false;
-$datecreate = '001737227022';
-$dateexpire = '001773227022';
-$ser_content = 'a:2:{s:7:"CONTENT";s:631:"<div class="product-list">
+$datecreate = '001737308160';
+$dateexpire = '001773308160';
+$ser_content = 'a:2:{s:7:"CONTENT";s:649:"<div class="product-list">
 	<div class="product">
 		<div class="product-overlay"></div>
 		<div class="product-image" style="background-image: url(/upload/iblock/63e/39j0vtij526i3crd2tf5kt0fo572l2li.gif)"></div>
