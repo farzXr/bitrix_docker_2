@@ -1,0 +1,7 @@
+<?
+if($INCLUDE_FROM_CACHE!='Y')return false;
+$datecreate = '001737227322';
+$dateexpire = '001737313722';
+$ser_content = 'a:2:{s:7:"CONTENT";s:0:"";s:4:"VARS";a:7:{i:0;a:5:{s:2:"ID";s:1:"9";s:7:"SITE_ID";s:2:"s1";s:9:"CONDITION";s:38:"CSite::InDir(\'/pub/calendar-sharing/\')";s:4:"SORT";s:1:"0";s:8:"TEMPLATE";s:16:"calendar_sharing";}i:1;a:5:{s:2:"ID";s:2:"10";s:7:"SITE_ID";s:2:"s1";s:9:"CONDITION";s:36:"CSite::InDir(\'/pub/calendar-event/\')";s:4:"SORT";s:1:"0";s:8:"TEMPLATE";s:16:"calendar_sharing";}i:2;a:5:{s:2:"ID";s:2:"11";s:7:"SITE_ID";s:2:"s1";s:9:"CONDITION";s:29:"CSite::InDir(\'/desktop_app/\')";s:4:"SORT";s:1:"1";s:8:"TEMPLATE";s:11:"desktop_app";}i:3;a:5:{s:2:"ID";s:2:"12";s:7:"SITE_ID";s:2:"s1";s:9:"CONDITION";s:93:"preg_match("#^/video/([\\.\\-0-9a-zA-Z]+)(/?)([^/]*)#", $GLOBALS[\'APPLICATION\']->GetCurPage(0))";s:4:"SORT";s:2:"50";s:8:"TEMPLATE";s:8:"call_app";}i:4;a:5:{s:2:"ID";s:2:"13";s:7:"SITE_ID";s:2:"s1";s:9:"CONDITION";s:116:"preg_match("#^/desktop_app/router.php\\?alias=([\\.\\-0-9a-zA-Z]+)&videoconf#", $GLOBALS[\'APPLICATION\']->GetCurPage(0))";s:4:"SORT";s:2:"60";s:8:"TEMPLATE";s:8:"call_app";}i:5;a:5:{s:2:"ID";s:2:"14";s:7:"SITE_ID";s:2:"s1";s:9:"CONDITION";s:94:"preg_match("#^/online/([\\.\\-0-9a-zA-Z]+)(/?)([^/]*)#", $GLOBALS[\'APPLICATION\']->GetCurPage(0))";s:4:"SORT";s:3:"100";s:8:"TEMPLATE";s:3:"pub";}i:6;a:5:{s:2:"ID";s:2:"15";s:7:"SITE_ID";s:2:"s1";s:9:"CONDITION";s:0:"";s:4:"SORT";s:3:"150";s:8:"TEMPLATE";s:14:"furniture_gray";}}}';
+return true;
+?>
