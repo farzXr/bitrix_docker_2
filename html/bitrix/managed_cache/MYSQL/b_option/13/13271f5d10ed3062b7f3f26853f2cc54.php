@@ -1,7 +1,7 @@
 <?
 if($INCLUDE_FROM_CACHE!='Y')return false;
-$datecreate = '001737316136';
-$dateexpire = '001737319736';
+$datecreate = '001737371053';
+$dateexpire = '001737374653';
 $ser_content = 'a:2:{s:7:"CONTENT";s:0:"";s:4:"VARS";a:1:{s:1:"-";a:1:{s:49:"~LearnInstall201203ConvertDB::_IsAlreadyConverted";s:1:"1";}}}';
 return true;
 ?>
